@@ -14,11 +14,13 @@ public class OrderService {
     private final RestTemplate restTemplate;
     private final RestClient restClient;
     private final InventoryClient inventoryClient;
+    private final InventoryService inventoryService;
 
-    public OrderService(RestTemplate restTemplate, RestClient restClient, InventoryClient inventoryClient) {
+    public OrderService(RestTemplate restTemplate, RestClient restClient, InventoryClient inventoryClient, InventoryService inventoryService) {
         this.restTemplate = restTemplate;
         this.restClient = restClient;
         this.inventoryClient = inventoryClient;
+        this.inventoryService = inventoryService;
     }
 
     public String placeOrder(Long productId) {
@@ -28,7 +30,7 @@ public class OrderService {
 //                    throw new MyCustomRuntimeException(response1.getStatusCode(), response1.getHeaders());
 //                })))
 //                .toEntity(Inventory.class);
-        Inventory inventory= inventoryClient.getInventory(productId);
+        Inventory inventory = inventoryService.getInventory(productId);
         updateInventory(inventory);
         return inventory.getQuantity() > 0 ? "Order Placed Successfully" :
                 "Product Out Of Stock";
