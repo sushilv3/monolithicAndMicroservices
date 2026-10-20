@@ -24,5 +24,25 @@ resilience4j:
         limit-for-period: 2
         limit-refresh-period: 10s
         timeout-duration: 0s
+  circuitbreaker:
+    instances:
+      inventoryServiceCircuitBreaker:
+        # sliding window configuration
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 6
+        minimum-number-of-calls: 1
+
+        # failure Threshold
+        failure-rate-threshold: 50
+
+        #open state configuration
+        wait-duration-in-open-state: 10s
+
+        # half open state
+        permitted-number-of-calls-in-half-open-state: 3
+        max-wait-duration-in-half-open-state: 5s
+        automatic-transition-from-open-to-half-open-enabled: true
+
+
 
 
