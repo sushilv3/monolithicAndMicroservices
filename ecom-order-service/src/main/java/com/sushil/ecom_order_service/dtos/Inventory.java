@@ -4,6 +4,12 @@ public class Inventory {
     private Long productId;
     private Integer quantity;
 
+    public Inventory(Long productId, Integer quantity) {
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
+
     public Long getProductId() {
         return productId;
     }
