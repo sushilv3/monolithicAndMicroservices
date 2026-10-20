@@ -16,15 +16,21 @@ public class InventoryController {
     @GetMapping("/{productId}")
     public Inventory checkInventory(@PathVariable Long productId) {
 //        return productId.equals("1") ? "IN STOCK" : "OUT STOCK";
-    return inventoryService.checkStock(productId);
+//       try {
+//           Thread.sleep(15000);
+//       } catch (InterruptedException e) {
+//           throw new RuntimeException(e.getMessage());
+//       }
+        return inventoryService.checkStock(productId);
     }
 
     @PostMapping
-    public String addProduct(@RequestBody Inventory inventory){
-        return  inventoryService.addProduct(inventory);
+    public String addProduct(@RequestBody Inventory inventory) {
+        return inventoryService.addProduct(inventory);
     }
+
     @PutMapping
-    public String updateProduct(@RequestBody Inventory inventory){
+    public String updateProduct(@RequestBody Inventory inventory) {
         return inventoryService.updateProduct(inventory);
     }
 
